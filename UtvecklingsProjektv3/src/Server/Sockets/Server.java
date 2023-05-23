@@ -1,7 +1,7 @@
 package Server.Sockets;
 
-import Server.GUI.ServerFrame;
 import Entity.*;
+import Server.GUI.TrafficViewer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class Server extends Thread{
 
-    private ServerFrame serverFrame;
+    private TrafficViewer trafficViewer;
     private int port = 12345;
     private HashMap<User, ClientHandler> onlineUsers;
     private HashMap<User, ArrayList<String>> contactList;
@@ -22,7 +22,7 @@ public class Server extends Thread{
     private ServerUpdate serverUpdate = null;
 
     public Server(){
-        this.serverFrame = new ServerFrame();
+        this.trafficViewer = new TrafficViewer();
         onlineUsers = new HashMap<>();
         contactList = new HashMap<>();
         this.storedMessages = new StoredMessages();
@@ -106,5 +106,9 @@ public class Server extends Thread{
         System.out.println("Uppdaterade kontakterna för " + user.getUsername() + " med kontakterna " + user.getContacts());
         onlineUsers.put(user, clientHandler);
         contactList.put(user, user.getContacts());
+    }
+
+    public static void main(String[] args) {
+        new Server();
     }
 }
