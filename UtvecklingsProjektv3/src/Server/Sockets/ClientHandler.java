@@ -5,7 +5,9 @@ import Entity.Message;
 import Entity.User;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ClientHandler {
@@ -17,16 +19,28 @@ public class ClientHandler {
     public ClientHandler(Socket socket, Server server){
         this.socket = socket;
         this.server = server;
+        new MessageReceiver(this).start();
+        new MessageSender().start();
     }
 
+    public User getUser() {
+        return user;
+    }
 
-    private class MessageReciever extends Thread{
+    public void addMessage(Message message){
+        objectBuffer.put(message);
+    }
 
-        private Server server;
+    public void newServerUpdate(Object update) {
+        objectBuffer.put(update);
+    }
+
+    private class MessageReceiver extends Thread{
+
         private ObjectInputStream ois;
         private ClientHandler clientHandler;
 
-        public MessageReciever(ClientHandler clientHandler){
+        public MessageReceiver(ClientHandler clientHandler){
             this.clientHandler = clientHandler;
         }
 
@@ -68,4 +82,22 @@ public class ClientHandler {
             }
         }
     }
+
+    private class MessageSender extends Thread{
+        private ObjectOutputStream oos;
+
+        public void run(){
+            try{
+                oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                while(true){
+                    oos.writeObject(objectBuffer.get());
+                    oos.flush();
+                    System.out.println("Skickat något till klient");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
