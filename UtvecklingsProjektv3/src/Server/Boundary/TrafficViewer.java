@@ -1,4 +1,4 @@
-package Server.GUI;
+package Server.Boundary;
 
 import javax.swing.*;
 import java.awt.*;

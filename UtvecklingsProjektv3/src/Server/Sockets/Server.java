@@ -1,7 +1,7 @@
 package Server.Sockets;
 
 import Entity.*;
-import Server.GUI.TrafficViewer;
+import Server.Boundary.TrafficViewer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
