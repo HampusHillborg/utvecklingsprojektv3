@@ -1,5 +1,6 @@
 package Client.Controller;
 
+import Client.Boundary.MainFrame;
 import Client.Boundary.UserRegistrationDialog;
 import Entity.Message;
 import Entity.User;

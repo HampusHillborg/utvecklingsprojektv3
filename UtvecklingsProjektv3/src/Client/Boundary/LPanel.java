@@ -1,8 +1,9 @@
 package Client.Boundary;
 
-import client.controller.ClientController;
-import model.ServerUpdate;
-import model.User;
+import Client.Controller.Client;
+import Entity.ServerUpdate;
+import Entity.User;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class LPanel extends JPanel {
-    private ClientController controller;
-    private int width;
-    private int hight;
-
+    private Client controller;
     private JList<String> connectedUsers;
     private JList<String> contacts;
     private JLabel text;
@@ -22,7 +20,7 @@ public class LPanel extends JPanel {
     private JButton removeContact;
     private DefaultListModel<String> contactList;
 
-    public LPanel(ClientController controller, int width, int higth){
+    public LPanel(Client controller, int width, int higth){
         this.controller = controller;
         this.setSize(width, higth);
         this.setLayout(null);

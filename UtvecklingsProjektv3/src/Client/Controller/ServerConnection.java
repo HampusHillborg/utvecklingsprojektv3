@@ -1,5 +1,6 @@
 package Client.Controller;
 
+import Client.Boundary.MainFrame;
 import Entity.*;
 
 import java.io.*;

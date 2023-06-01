@@ -1,8 +1,9 @@
 package Client.Boundary;
 
-import client.controller.ClientController;
-import model.Message;
-import model.User;
+import Client.Controller.Client;
+import Entity.Message;
+import Entity.User;
+
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RPanel extends JPanel {
-    private ClientController controller;
+    private Client controller;
     private LPanel leftpanel;
     private int width;
     private int height;
@@ -25,7 +26,7 @@ public class RPanel extends JPanel {
     private JLabel username;
     private JLabel chatbuddyname;
 
-    public RPanel(ClientController controller, LPanel leftpanel, int width, int height) {
+    public RPanel(Client controller, LPanel leftpanel, int width, int height) {
         this.controller = controller;
         this.leftpanel = leftpanel;
         this.setSize(width, height);

@@ -1,8 +1,9 @@
 package Client.Boundary;
 
-import client.controller.ClientController;
-import model.Message;
-import model.User;
+
+import Client.Controller.Client;
+import Entity.Message;
+import Entity.User;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -10,11 +11,11 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends JFrame {
     private MainPanel mainPanel;
-    private ClientController controller;
+    private Client controller;
     private final int width = 1000;
     private final int hight = 660;
 
-    public MainFrame(ClientController controller) {
+    public MainFrame(Client controller) {
         super("Chat Client");
         this.setResizable(false);
         this.setSize(width, hight);
