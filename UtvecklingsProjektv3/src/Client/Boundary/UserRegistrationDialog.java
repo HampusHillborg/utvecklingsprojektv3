@@ -79,7 +79,7 @@ public class UserRegistrationDialog extends JDialog {
                 int result = fileChooser.showOpenDialog(UserRegistrationDialog.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    icon = new ImageIcon(selectedFile.getPath());
+                    //icon = new ImageIcon(selectedFile.getPath());
                     if (icon.getIconHeight() > 256 || icon.getIconWidth() > 256) {
                         JOptionPane.showMessageDialog(UserRegistrationDialog.this, "Image is too large. Please choose a smaller image.");
                         return;
@@ -93,6 +93,9 @@ public class UserRegistrationDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ip;
+                icon = new ImageIcon("UtvecklingsProjektv3/koskesh.jpg");
+                imageLabel.setIcon(icon);
+
                 try {
                     ip = InetAddress.getByName(hostField.getText()).getHostAddress();
                 } catch (UnknownHostException ex) {
