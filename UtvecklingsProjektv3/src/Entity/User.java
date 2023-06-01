@@ -62,4 +62,15 @@ public class User implements Serializable {
     public void setContacts(ArrayList<String> contactlist) {
         this.contacts = contactlist;
     }
+    public ArrayList<User> getUsersFromString(ArrayList<String> userStrings){
+        ArrayList<User> users = new ArrayList<>();
+        for(int i = 0; i < userStrings.size(); i++){
+            users.add(new User(userStrings.get(i)));
+        }
+        return users;
+    }
+
+    public String toString(){
+        return String.format("User: " + username);
+    }
 }

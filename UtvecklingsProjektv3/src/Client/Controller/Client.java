@@ -1,13 +1,10 @@
 package Client.Controller;
 
-import Client.Boundary.ButtonType;
-import Client.Boundary.MainFrame;
 import Client.Boundary.UserRegistrationDialog;
 import Entity.Message;
 import Entity.User;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 

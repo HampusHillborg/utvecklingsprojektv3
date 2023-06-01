@@ -1,13 +1,9 @@
 package Client.Controller;
 
-import Client.Boundary.MainFrame;
 import Entity.*;
-import Server.Sockets.ClientHandler;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 
 public class ServerConnection {
 
