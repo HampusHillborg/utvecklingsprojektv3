@@ -39,8 +39,11 @@ public class MainPanel extends JPanel {
     public void setContacts(ArrayList<String> contacts) {
         rPanel.setContacts(contacts);
     }
+    /*
     public void serverUpdate(ServerUpdate update) {
         rPanel.serverUpdate(update);
     }
+
+     */
 
 }

@@ -1,6 +1,6 @@
 package Client.Boundary;
 
-import Client.Controller.ClientHandler;
+import Client.Controller.ServerConnection;
 
 import javax.swing.*;
 
@@ -12,7 +12,7 @@ public class MPanel extends JPanel{
     private JLabel lblTitle;
     private int width;
     private int height;
-    private ClientHandler clientHandler;
+    private ServerConnection serverConnection;
     public MPanel(int width, int height, MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.setLayout(null);
@@ -35,6 +35,6 @@ public class MPanel extends JPanel{
 
     }
     public void serverUpdate(){
-        connectedUsers.setListData(clientHandler.);
+        //connectedUsers.setListData();
     }
 }

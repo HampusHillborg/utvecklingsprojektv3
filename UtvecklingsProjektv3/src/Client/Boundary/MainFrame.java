@@ -20,6 +20,6 @@ public class MainFrame extends JFrame {
 
     }
     public void buttonPressed(ButtonType pressedButton){
-        client.buttonPressed(pressedButton);
+        //client.buttonPressed(pressedButton);
     }
 }

@@ -116,7 +116,7 @@ public class LPanel extends JPanel {
         public void actionPerformed(ActionEvent e)
         {
             if (e.getSource() == sendButton) {
-                client.sendMessage(messageField.getText(), rPanel.getSelectedRecipients());
+                //client.sendMessage(messageField.getText(), rPanel.getSelectedRecipients());
                 messageField.setText("");
 
             }

@@ -1,5 +1,6 @@
 package Client.Boundary;
 
+import Client.Controller.Client;
 import Entity.User;
 
 import javax.swing.*;
@@ -17,13 +18,14 @@ public class UserRegistrationDialog extends JDialog {
     private JTextField portField;
     private JButton chooseImageButton;
     private JLabel imageLabel;
+    private ImageIcon icon;
 
     private User user;
     private String host;
     private int port;
     private boolean loggedIn = false;
 
-    public UserRegistrationDialog() {
+    public UserRegistrationDialog(Client client) {
         setTitle("Chat Login");
         setModalityType(ModalityType.APPLICATION_MODAL);
         setSize(400, 400);
@@ -77,7 +79,7 @@ public class UserRegistrationDialog extends JDialog {
                 int result = fileChooser.showOpenDialog(UserRegistrationDialog.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    ImageIcon icon = new ImageIcon(selectedFile.getPath());
+                    icon = new ImageIcon(selectedFile.getPath());
                     if (icon.getIconHeight() > 256 || icon.getIconWidth() > 256) {
                         JOptionPane.showMessageDialog(UserRegistrationDialog.this, "Image is too large. Please choose a smaller image.");
                         return;
@@ -118,7 +120,7 @@ public class UserRegistrationDialog extends JDialog {
                     return;
                 }
 
-                user = new User(usernameField.getText(), (ImageIcon) imageLabel.getIcon());
+                client.createUser(usernameField.getText(), icon);
                 host = ip;
                 port = Integer.parseInt(portField.getText());
                 loggedIn = true;

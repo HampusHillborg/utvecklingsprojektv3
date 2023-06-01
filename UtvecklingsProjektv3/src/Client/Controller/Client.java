@@ -4,18 +4,66 @@ import Client.Boundary.ButtonType;
 import Client.Boundary.MainFrame;
 import Client.Boundary.UserRegistrationDialog;
 import Entity.Message;
+import Entity.User;
 
+import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Client {
     private MainFrame view;
-    private ClientHandler clientHandler;
+    private ServerConnection serverConnection;
+    private UserRegistrationDialog loginWindow;
+    private User login;
 
     public Client() {
-        UserRegistrationDialog userRegistrationDialog = new UserRegistrationDialog();
+        loginWindow = new UserRegistrationDialog(this);
+        loginWindow.setVisible(true);
+
     }
 
+    public void createUser(String username, ImageIcon avatar){
+        login = new User(username, avatar);
+    }
+
+    public static void main(String[] args) {
+        new Client();
+    }
+
+/*
+    public void clientDisconnecting() {
+        serverConnection.clientDisconnecting();
+    }
+
+    public void sendMessage(String text, ArrayList<String> recipients) {
+        Message msg = new Message();
+        msg.setText(text);
+        msg.setSender(serverConnection.getUser());
+        msg.setRecipients(serverConnection.getUser().getUsersFromString(recipients));
+        serverConnection.sendMessage(msg);
+        view.displayNewMessage(msg);
+    }
+
+    public ServerConnection getServerConnection() {
+        return serverConnection;
+    }
+
+    public void addContact(String selectedContactToAdd) {
+        serverConnection.getUser().addContact(selectedContactToAdd);
+        serverConnection.addContacts();
+        serverConnection.sendUser();
+    }
+
+    public void removeContact(String selectedContactToRemove){
+        serverConnection.getUser().removeContact(selectedContactToRemove);
+        serverConnection.sendUser();
+    }
+
+
+ */
+
+    /*
     public void buttonPressed(ButtonType button){
 
         switch (button) {
@@ -63,5 +111,7 @@ public class Client {
     public ServerConnection getServerConnection() {
         return serverConnection;
     }
+
+     */
 
 }
