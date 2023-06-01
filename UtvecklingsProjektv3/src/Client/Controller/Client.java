@@ -1,5 +1,6 @@
 package Client.Controller;
 
+import Client.Boundary.MainFrame;
 import Client.Boundary.UserRegistrationDialog;
 import Entity.Message;
 import Entity.User;
@@ -23,26 +24,26 @@ public class Client {
         login = new User(username, avatar);
         try {
             view = new MainFrame(this);
-            serverConnection = new ServerConnection("localhost", 12345, this, login, view);
+            serverConnection = new ServerConnection("localhost", 12345, this, login, view.getMainPanel());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void sendMessage(String text, ArrayList<String> recipients) {
+   /* public void sendMessage(String text, ArrayList<String> recipients) {
         Message msg = new Message();
         msg.setText(text);
         msg.setSender(serverConnection.getUser());
         msg.setRecipients(serverConnection.getUser().getUsersFromString(recipients));
         serverConnection.sendMessage(msg);
         view.displayMessage(msg);
-    }
+    }*/
 
     public static void main(String[] args) {
         new Client();
     }
 
-/*
+
     public void clientDisconnecting() {
         serverConnection.clientDisconnecting();
     }
@@ -62,7 +63,7 @@ public class Client {
 
     public void addContact(String selectedContactToAdd) {
         serverConnection.getUser().addContact(selectedContactToAdd);
-        serverConnection.addContacts();
+        serverConnection.addContacts(selectedContactToAdd);
         serverConnection.sendUser();
     }
 
@@ -72,7 +73,7 @@ public class Client {
     }
 
 
- */
+
 
     /*
     public void buttonPressed(ButtonType button){
@@ -123,6 +124,6 @@ public class Client {
         return serverConnection;
     }
 
-     */
+    */
 
 }

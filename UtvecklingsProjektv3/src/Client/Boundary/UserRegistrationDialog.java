@@ -150,4 +150,7 @@ public class UserRegistrationDialog extends JDialog {
     public boolean isUserLoggedIn() {
         return loggedIn;
     }
+    public static void main(String[] args){
+        UserRegistrationDialog user = new UserRegistrationDialog(new Client());
+    }
 }

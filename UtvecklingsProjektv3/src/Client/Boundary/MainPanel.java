@@ -1,16 +1,17 @@
 package Client.Boundary;
 
-import client.controller.ClientController;
-import model.Message;
-import model.ServerUpdate;
-import model.User;
+import Client.Controller.Client;
+import Entity.Message;
+import Entity.ServerUpdate;
+import Entity.User;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
-    private ClientController controller;
+    private Client controller;
     private Message msg;
     private int width;
     private int hight;
@@ -18,7 +19,7 @@ public class MainPanel extends JPanel {
     private LPanel leftPanel; //Kontakter, användare online etc.
     private RPanel rightPanel; //Chatt och möjlighet att skriva.
 
-    public MainPanel(ClientController controller, int width, int hight) {
+    public MainPanel(Client controller, int width, int hight) {
         this.width = width;
         this.hight = hight;
         this.controller = controller;

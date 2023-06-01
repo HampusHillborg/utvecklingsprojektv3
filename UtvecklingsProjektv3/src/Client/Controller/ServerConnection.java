@@ -1,5 +1,7 @@
 package Client.Controller;
 
+import Client.Boundary.MainFrame;
+import Client.Boundary.MainPanel;
 import Entity.*;
 
 import java.io.*;
@@ -11,9 +13,9 @@ public class ServerConnection {
     private Socket socket;
     private Buffer<Object> messageBuffer;
     private User user;
-    private MainFrame view;
+    private MainPanel view;
 
-    public ServerConnection(String ip, int port, Client client, User user, MainFrame view) throws IOException {
+    public ServerConnection(String ip, int port, Client client, User user, MainPanel view) throws IOException {
         this.client = client;
         this.view = view;
         this.user = user;
@@ -26,6 +28,13 @@ public class ServerConnection {
     public void sendMessage(Message message){
         messageBuffer.put(message);
     }
+
+    public void clientDisconnecting() {
+        Message msg = new Message();
+        msg.setText("//disconnect");
+        messageBuffer.put(msg);
+    }
+
     public void sendUser(){
         messageBuffer.put(user);
     }
