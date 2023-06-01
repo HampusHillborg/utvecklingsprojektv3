@@ -79,14 +79,20 @@ public class TrafficViewer extends JFrame {
 
     private String retrieveTrafficLog(Date startTime, Date endTime) {
         StringBuilder logBuilder = new StringBuilder();
+
         try (BufferedReader reader = new BufferedReader(new FileReader("messages.txt"))) {
             String line;
+
             while ((line = reader.readLine()) != null) {
-                String dateTimeStr = line.substring(line.indexOf('[') + 1, line.indexOf(']'));
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date logDateTime = formatter.parse(dateTimeStr);
-                if (logDateTime.compareTo(startTime) >= 0 && logDateTime.compareTo(endTime) <= 0) {
-                    logBuilder.append(line).append("\n");
+                int startIndex = line.indexOf('[');
+                int endIndex = line.indexOf(']');
+                if (startIndex >= 0 && endIndex > startIndex) {
+                    String dateTimeStr = line.substring(startIndex + 1, endIndex);
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    Date logDateTime = formatter.parse(dateTimeStr);
+                    if (logDateTime.compareTo(startTime) >= 0 && logDateTime.compareTo(endTime) <= 0) {
+                        logBuilder.append(line).append("\n");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -94,6 +100,7 @@ public class TrafficViewer extends JFrame {
         }
         return logBuilder.toString();
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

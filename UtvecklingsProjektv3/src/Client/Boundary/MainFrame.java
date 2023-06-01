@@ -40,4 +40,9 @@ public class MainFrame extends JFrame {
     public void setUser(User login) {
         mainPanel.setUser(login);
     }
+
+    public void setImageMessage(ImageIcon icon){
+        mainPanel.setImageMessage(icon);
+    }
 }
+

@@ -18,6 +18,7 @@ public class MainPanel extends JPanel {
 
     private LPanel leftPanel; //Kontakter, användare online etc.
     private RPanel rightPanel; //Chatt och möjlighet att skriva.
+    private ImageDisplay imageDisplay;
 
     public MainPanel(Client controller, int width, int hight) {
         this.width = width;
@@ -40,6 +41,10 @@ public class MainPanel extends JPanel {
         rightPanel.setLocation(width/3, 0);
         add(rightPanel);
 
+        imageDisplay = new ImageDisplay();
+        imageDisplay.setBounds(0, 0, width / 3, hight); // Set size and location
+        add(imageDisplay);
+
 
     }
 
@@ -58,4 +63,9 @@ public class MainPanel extends JPanel {
     public void setContacts(ArrayList<String> contacts) {
         leftPanel.setContacts(contacts);
     }
+
+    public void setImageMessage(ImageIcon icon){
+        imageDisplay.setImage(icon);
+    }
+
 }

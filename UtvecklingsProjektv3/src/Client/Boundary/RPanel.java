@@ -14,18 +14,16 @@ import java.awt.event.ActionListener;
 public class RPanel extends JPanel {
     private Client controller;
     private LPanel leftpanel;
-    private int width;
-    private int height;
     private JTextArea chatWindow;
     private JTextArea writeMessageWindow;
     private JButton sendMessage;
     private JButton choosePic;
     private String imagePath;
     private JLabel userPic;
-    private JLabel chatPic;
     private JLabel username;
     private JLabel chatbuddyname;
     private ImageIcon imageToSend;
+    private JLabel iconPanel;
 
     public RPanel(Client controller, LPanel leftpanel, int width, int height) {
         this.controller = controller;
@@ -43,6 +41,10 @@ public class RPanel extends JPanel {
         chatWindow.setBackground(new Color(255, 255, 255));
         chatWindow.setEditable(false);
         add(chatWindow);
+
+        iconPanel = new JLabel();
+        iconPanel.setIcon(null);
+        add(iconPanel);
 
         choosePic = new JButton("Välj bild");
         choosePic.setSize(220, 40);
@@ -77,15 +79,6 @@ public class RPanel extends JPanel {
         sendMessage.setLocation(470,545);
         add(sendMessage);
 
-        ImageIcon imageIcon = new ImageIcon("images/angry.png"); // load the image to a imageIcon
-        Image image = imageIcon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(60, 60,  Image.SCALE_SMOOTH); // scale it the smooth way
-        imageIcon = new ImageIcon(newimg);  // transform it back
-
-        userPic = new JLabel(imageIcon);
-        userPic.setSize(40,40);
-        userPic.setLocation(40, 100);
-        add(userPic);
 
         ImageIcon imageIcon2 = new ImageIcon("images/angry.png"); // load the image to a imageIcon
         Image image2 = imageIcon2.getImage(); // transform it
@@ -118,23 +111,12 @@ public class RPanel extends JPanel {
         repaint();
     }
 
-    public void setChatPic(ImageIcon icon){
-        Image image = icon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(60, 60,  Image.SCALE_SMOOTH); // scale it the smooth way
-        icon = new ImageIcon(newimg);  // transform it back
-        chatPic.setIcon(icon);
-        repaint();
-    }
 
     public void setUser(User login) {
         setUserPic((ImageIcon) login.getIcon());
         username.setText(login.getUsername());
     }
 
-    public void setChatBuddy(User user){
-        setChatPic((ImageIcon) user.getIcon());
-        chatbuddyname.setText(user.getUsername());
-    }
 
     private void addListeners() {
         ActionListener listener = new ButtonActionListeners();
@@ -144,11 +126,9 @@ public class RPanel extends JPanel {
     public void newMessage(Message msg) {
         String text = String.format("%s %s skriver: %s \n", msg.getHourTime(), msg.getSender(), msg.getText());
         if(msg.getIcon() != null){
-            System.out.println("hej");
-            JOptionPane.showMessageDialog(null, msg.getIcon());
+            controller.setImage(msg.getIcon());
         }
         chatWindow.append(text);
-
     }
 
     class ButtonActionListeners implements ActionListener {

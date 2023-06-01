@@ -24,6 +24,10 @@ public class Client {
         view.setUser(login);
     }
 
+    public void setImage(ImageIcon image){
+        view.setImageMessage(image);
+    }
+
     public void createUser(String username, ImageIcon avatar){
         login = new User(username, avatar);
         try {
