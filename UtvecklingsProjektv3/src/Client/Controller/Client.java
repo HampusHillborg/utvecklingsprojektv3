@@ -25,11 +25,20 @@ public class Client {
     public void createUser(String username, ImageIcon avatar){
         login = new User(username, avatar);
         try {
-            view = new MainFrame( this);
-            serverConnection = new ServerConnection("localhost", 12345, this, login, view.getMainPanel());
+            view = new MainFrame(this);
+            serverConnection = new ServerConnection("localhost", 12345, this, login, view);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void sendMessage(String text, ArrayList<String> recipients) {
+        Message msg = new Message();
+        msg.setText(text);
+        msg.setSender(serverConnection.getUser());
+        msg.setRecipients(serverConnection.getUser().getUsersFromString(recipients));
+        serverConnection.sendMessage(msg);
+        view.displayMessage(msg);
     }
 
     public static void main(String[] args) {

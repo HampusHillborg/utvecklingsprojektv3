@@ -1,7 +1,6 @@
 package Client.Controller;
 
 import Client.Boundary.MainFrame;
-import Client.Boundary.MainPanel;
 import Entity.*;
 import Server.Sockets.ClientHandler;
 
@@ -16,9 +15,9 @@ public class ServerConnection {
     private Socket socket;
     private Buffer<Object> messageBuffer;
     private User user;
-    private MainPanel view;
+    private MainFrame view;
 
-    public ServerConnection(String ip, int port, Client client, User user, MainPanel view) throws IOException {
+    public ServerConnection(String ip, int port, Client client, User user, MainFrame view) throws IOException {
         this.client = client;
         this.view = view;
         this.user = user;
