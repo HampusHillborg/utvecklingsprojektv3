@@ -14,18 +14,18 @@ public class MainPanel extends JPanel {
     private Client controller;
     private Message msg;
     private int width;
-    private int hight;
+    private int height;
 
     private LPanel leftPanel; //Kontakter, användare online etc.
     private RPanel rightPanel; //Chatt och möjlighet att skriva.
     private ImageDisplay imageDisplay;
 
-    public MainPanel(Client controller, int width, int hight) {
+    public MainPanel(Client controller, int width, int height) {
         this.width = width;
-        this.hight = hight;
+        this.height = height;
         this.controller = controller;
 
-        this.setSize(width, hight);
+        this.setSize(width, height);
         this.setLayout(null);
         this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
@@ -33,17 +33,15 @@ public class MainPanel extends JPanel {
     }
 
     public void setUp(){
-        leftPanel = new LPanel(controller, width / 3, hight);
+        leftPanel = new LPanel(controller, width / 3, height);
         leftPanel.setLocation(0,0);
         add(leftPanel);
 
-        rightPanel = new RPanel(controller, leftPanel,  700, hight);
+        rightPanel = new RPanel(controller, leftPanel,  700, height);
         rightPanel.setLocation(width/3, 0);
         add(rightPanel);
 
-        imageDisplay = new ImageDisplay();
-        imageDisplay.setBounds(0, 0, width / 3, hight); // Set size and location
-        add(imageDisplay);
+
 
 
     }

@@ -9,15 +9,17 @@ public class ImageDisplay extends JPanel {
     private JLabel textLabel;
 
     public ImageDisplay() {
-        setLayout(new BorderLayout());
+       setUp();
+    }
 
+    private void setUp(){
+        setSize(90, 90);
         imageLabel = new JLabel();
-        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(imageLabel, BorderLayout.CENTER);
+        imageLabel.setSize(90, 20);
+        add(imageLabel);
 
         textLabel = new JLabel();
-        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(textLabel, BorderLayout.NORTH);
+        add(textLabel);
     }
 
     public void setText(String text) {

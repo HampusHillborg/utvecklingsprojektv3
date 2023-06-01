@@ -125,10 +125,21 @@ public class RPanel extends JPanel {
 
     public void newMessage(Message msg) {
         String text = String.format("%s %s skriver: %s \n", msg.getHourTime(), msg.getSender(), msg.getText());
-        if(msg.getIcon() != null){
-            controller.setImage(msg.getIcon());
-        }
         chatWindow.append(text);
+        if(msg.getIcon() != null){
+            JPanel panel = new JPanel(new BorderLayout());
+
+            // Create a JLabel for the text
+            JLabel textLabel = new JLabel(msg.getSender() + " sent picture: ");
+            panel.add(textLabel, BorderLayout.NORTH);
+
+            // Create a JLabel for the image
+            JLabel imageLabel = new JLabel(msg.getIcon());
+            panel.add(imageLabel, BorderLayout.CENTER);
+
+            // Show the panel in a dialog
+            JOptionPane.showMessageDialog(this, panel);
+        }
     }
 
     class ButtonActionListeners implements ActionListener {
