@@ -1,5 +1,4 @@
 package Server.Sockets;
-
 import Entity.Buffer;
 import Entity.Message;
 import Entity.User;
@@ -16,9 +15,10 @@ public class ClientHandler {
     private User user;
     private Server server;
 
-    public ClientHandler(Socket socket, Server server){
+    public ClientHandler(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
+        objectBuffer = new Buffer<Object>();
         new MessageReceiver(this).start();
         new MessageSender().start();
     }
@@ -27,7 +27,7 @@ public class ClientHandler {
         return user;
     }
 
-    public void addMessage(Message message){
+    public void addMessage(Message message) {
         objectBuffer.put(message);
     }
 
@@ -35,69 +35,64 @@ public class ClientHandler {
         objectBuffer.put(update);
     }
 
-    private class MessageReceiver extends Thread{
-
+    private class MessageReceiver extends Thread {
         private ObjectInputStream ois;
         private ClientHandler clientHandler;
 
-        public MessageReceiver(ClientHandler clientHandler){
+        public MessageReceiver(ClientHandler clientHandler) {
             this.clientHandler = clientHandler;
         }
 
-        public void run(){
-            try{
+        public void run() {
+            try {
                 ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-                //Första objektet som servern får ifrån Client är alltid ett user objekt.
                 user = (User) ois.readObject();
                 System.out.println(user.getUsername() + " anslöt sig.");
                 server.clientConnected(clientHandler);
 
-                //Sedan kan klient bara skicka Message objekt.
-                while(true){
+                while (true) {
                     Object obj = ois.readObject();
 
-                    if(obj instanceof Message){
+                    if (obj instanceof Message) {
                         Message msg = (Message) obj;
-                        if(msg.getText().equals("//disconnect")){
+                        if (msg.getText().equals("//disconnect")) {
                             server.clientDisconnected(user);
                             System.out.println("En klient disconnetar!");
-
-                        }else{
+                        } else {
                             server.sendMessage(msg);
                         }
                     }
 
-                    if(obj instanceof User){
-                        //Jämför namnet med aktiva klienter. Där det matchar uppdatera den klientens kontakter.
+                    if (obj instanceof User) {
                         User user = (User) obj;
                         System.out.println(user.getContacts());
                         server.updateActiveClientUser(user, clientHandler);
                     }
-
                 }
-
-
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private class MessageSender extends Thread{
+    private class MessageSender extends Thread {
         private ObjectOutputStream oos;
 
-        public void run(){
-            try{
+        public void run() {
+            try {
                 oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-                while(true){
-                    oos.writeObject(objectBuffer.get());
-                    oos.flush();
-                    System.out.println("Skickat något till klient");
+                while (true) {
+                    Object obj = objectBuffer.get();
+                    if (obj != null) {
+                        oos.writeObject(obj);
+                        oos.flush();
+                        System.out.println("Skickat något till klient");
+                    }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-
 }
+

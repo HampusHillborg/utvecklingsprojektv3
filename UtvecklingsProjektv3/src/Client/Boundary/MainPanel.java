@@ -1,6 +1,7 @@
 package Client.Boundary;
 
 import Client.Controller.Client;
+import Entity.Message;
 import Entity.ServerUpdate;
 
 import javax.swing.*;
@@ -24,6 +25,10 @@ public class MainPanel extends JPanel {
         mPanel = new MPanel(width / 2 +70, height, mainFrame);
         add(mPanel);
 
+    }
+
+    public void displayMessage(Message message){
+        lPanel.displayMessage(message);
     }
     protected LPanel getLeftPanel() {
         return lPanel;

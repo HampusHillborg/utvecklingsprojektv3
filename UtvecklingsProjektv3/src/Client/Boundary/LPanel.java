@@ -1,6 +1,7 @@
 package Client.Boundary;
 
 import Client.Controller.Client;
+import Entity.Message;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -34,6 +35,10 @@ public class LPanel extends JPanel {
         this.setSize(width, height);
         setLocation(0, 0);
         setUp();
+    }
+
+    public void displayMessage(Message message) {
+        messageWindow.append(message.getText() + "\n");
     }
 
     private void setUp(){

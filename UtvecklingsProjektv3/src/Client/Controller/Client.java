@@ -20,11 +20,16 @@ public class Client {
     public Client() {
         loginWindow = new UserRegistrationDialog(this);
         loginWindow.setVisible(true);
-
     }
 
     public void createUser(String username, ImageIcon avatar){
         login = new User(username, avatar);
+        try {
+            view = new MainFrame( this);
+            serverConnection = new ServerConnection("localhost", 12345, this, login, view.getMainPanel());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void main(String[] args) {

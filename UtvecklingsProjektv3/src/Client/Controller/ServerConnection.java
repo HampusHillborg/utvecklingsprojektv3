@@ -7,6 +7,7 @@ import Server.Sockets.ClientHandler;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class ServerConnection {
@@ -15,9 +16,9 @@ public class ServerConnection {
     private Socket socket;
     private Buffer<Object> messageBuffer;
     private User user;
-    private MainFrame view;
+    private MainPanel view;
 
-    public ServerConnection(String ip, int port, Client client, User user, MainFrame view) throws IOException {
+    public ServerConnection(String ip, int port, Client client, User user, MainPanel view) throws IOException {
         this.client = client;
         this.view = view;
         this.user = user;
@@ -97,14 +98,14 @@ public class ServerConnection {
                         ContactList update = (ContactList) obj;
                         System.out.println(update.getContacts());
                         user.setContacts(update.getContacts());
-                        //view.setContacts(update.getContacts());
+                        view.setContacts(update.getContacts());
                     }
 
                     if(obj instanceof Message){
                         //Nytt meddelande. Displaya det i view.
                         System.out.println("Clienten fick ett nytt Message!");
                         Message msg = (Message) obj;
-                        //view.displayMessage(msg);
+                        view.displayMessage(msg);
                     }
                 }
 
