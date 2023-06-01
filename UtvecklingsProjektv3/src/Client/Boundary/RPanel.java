@@ -151,8 +151,6 @@ public class RPanel extends JPanel {
                 controller.sendMessage(writeMessageWindow.getText(), leftpanel.getSelectedRecipients());
                 writeMessageWindow.setText("");
 
-
-
             }
         }
     }

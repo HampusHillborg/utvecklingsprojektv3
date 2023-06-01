@@ -19,6 +19,8 @@ public class UserRegistrationDialog extends JDialog {
     private JButton chooseImageButton;
     private JLabel imageLabel;
     private ImageIcon icon;
+    private String username;
+
 
     private User user;
     private String host;
@@ -123,6 +125,7 @@ public class UserRegistrationDialog extends JDialog {
                     return;
                 }
 
+                username = usernameField.getText();
                 client.createUser(usernameField.getText(), icon);
                 host = ip;
                 port = Integer.parseInt(portField.getText());
@@ -137,6 +140,14 @@ public class UserRegistrationDialog extends JDialog {
 
     public User getUser() {
         return user;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public boolean isLoggedIn(){
+        return loggedIn;
     }
 
     public String getHost() {

@@ -15,9 +15,13 @@ public class Client {
     private UserRegistrationDialog loginWindow;
     private User login;
 
-    public Client() {
+    public Client() throws IOException {
         loginWindow = new UserRegistrationDialog(this);
-        loginWindow.setVisible(true);
+
+        while(!loginWindow.isLoggedIn()){
+
+        }
+        view.setUser(login);
     }
 
     public void createUser(String username, ImageIcon avatar){
@@ -30,6 +34,7 @@ public class Client {
         }
     }
 
+<<<<<<< Updated upstream
    /* public void sendMessage(String text, ArrayList<String> recipients) {
         Message msg = new Message();
         msg.setText(text);
@@ -44,6 +49,8 @@ public class Client {
     }
 
 
+=======
+>>>>>>> Stashed changes
     public void clientDisconnecting() {
         serverConnection.clientDisconnecting();
     }
@@ -72,6 +79,7 @@ public class Client {
         serverConnection.sendUser();
     }
 
+<<<<<<< Updated upstream
 
 
 
@@ -126,4 +134,12 @@ public class Client {
 
     */
 
+=======
+    public static void main(String[] args) throws IOException {
+        new Client();
+        new Client();
+    }
+
+
+>>>>>>> Stashed changes
 }

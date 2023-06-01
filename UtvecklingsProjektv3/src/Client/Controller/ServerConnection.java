@@ -44,6 +44,11 @@ public class ServerConnection {
     public void addContacts(String contact){
         this.user.addContact(contact);
     }
+    public void clientDisconnecting() {
+        Message msg = new Message();
+        msg.setText("//disconnect");
+        messageBuffer.put(msg);
+    }
 
 
     //Skickar meddelande till servern
@@ -94,6 +99,7 @@ public class ServerConnection {
                         //Ny serverupdate. Packa upp den och visa i view.
                         System.out.println("Clienten fick en serveruppdatering!");
                         ServerUpdate update = (ServerUpdate) obj;
+                        view.serverUpdate(update);
 
                     }
                     if(obj instanceof ContactList){
