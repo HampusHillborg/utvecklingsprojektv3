@@ -34,23 +34,6 @@ public class Client {
         }
     }
 
-<<<<<<< Updated upstream
-   /* public void sendMessage(String text, ArrayList<String> recipients) {
-        Message msg = new Message();
-        msg.setText(text);
-        msg.setSender(serverConnection.getUser());
-        msg.setRecipients(serverConnection.getUser().getUsersFromString(recipients));
-        serverConnection.sendMessage(msg);
-        view.displayMessage(msg);
-    }*/
-
-    public static void main(String[] args) {
-        new Client();
-    }
-
-
-=======
->>>>>>> Stashed changes
     public void clientDisconnecting() {
         serverConnection.clientDisconnecting();
     }
@@ -79,67 +62,11 @@ public class Client {
         serverConnection.sendUser();
     }
 
-<<<<<<< Updated upstream
-
-
-
-    /*
-    public void buttonPressed(ButtonType button){
-
-        switch (button) {
-            case Send:
-                sendMessage();
-                break;
-
-            case AddContact:
-                addContact();
-                break;
-
-            case AddImage:
-                addImage();
-                break;
-
-            case RemoveContact:
-                removeContact();
-                break;
-
-        }
-    }
-
-
-    public void sendMessage(String text, ArrayList<String> recipients){
-        Message msg = new Message();
-        msg.setText(text);
-        msg.setSender(ClientHandler.getUser());
-        msg.setRecipients(clientHandler.getUser().getUsersFromString(recipients));
-        clientHandler.sendMessage(msg);
-        view.displayNewMessage(msg);
-    }
-    public void addContact(){
-
-    }
-    public void addImage(){
-
-    }
-    public void removeContact(String selectedContactToRemove){
-        clientHandler.getUser().removeContact(selectedContactToRemove);
-        clientHandler.sendUser();
-    }
-    public ClientHandler getClientHandler() {
-        return clientHandler;
-    }
-    public ServerConnection getServerConnection() {
-        return serverConnection;
-    }
-
-    */
-
-=======
     public static void main(String[] args) throws IOException {
         new Client();
         new Client();
+        new Client();
     }
 
 
->>>>>>> Stashed changes
 }

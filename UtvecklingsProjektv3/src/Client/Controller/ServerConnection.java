@@ -44,11 +44,6 @@ public class ServerConnection {
     public void addContacts(String contact){
         this.user.addContact(contact);
     }
-    public void clientDisconnecting() {
-        Message msg = new Message();
-        msg.setText("//disconnect");
-        messageBuffer.put(msg);
-    }
 
 
     //Skickar meddelande till servern
