@@ -4,6 +4,7 @@ import Client.Boundary.MainFrame;
 import Client.Boundary.MainPanel;
 import Entity.*;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 
@@ -98,7 +99,7 @@ public class ServerConnection {
 
                     }
                     if(obj instanceof ContactList){
-                        //Clienten fick veta vilka contakter den har
+                        //Clienten fick veta vilka kontakter den har
                         System.out.println("Clienten fick en kontaktuppdatering!");
                         ContactList update = (ContactList) obj;
                         System.out.println(update.getContacts());

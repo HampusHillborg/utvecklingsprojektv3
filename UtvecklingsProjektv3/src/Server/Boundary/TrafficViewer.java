@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TrafficViewer extends JFrame {
@@ -55,7 +58,6 @@ public class TrafficViewer extends JFrame {
                 String startTimeStr = startTimeField.getText();
                 String endTimeStr = endTimeField.getText();
 
-                // Perform data retrieval based on start and end times
                 Date startTime = parseDateTime(startTimeStr);
                 Date endTime = parseDateTime(endTimeStr);
                 String trafficLog = retrieveTrafficLog(startTime, endTime);
@@ -66,19 +68,31 @@ public class TrafficViewer extends JFrame {
     }
 
     private Date parseDateTime(String dateTimeStr) {
-        // Implement your own parsing logic here
-        // Convert the date/time string to a Date object
-        // Example: SimpleDateFormat or DateTimeFormatter
-
-        return null; // Replace with the parsed Date object
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            return formatter.parse(dateTimeStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private String retrieveTrafficLog(Date startTime, Date endTime) {
-        // Implement your own logic to retrieve traffic log
-        // based on the given start and end times
-        // Example: Access logs or stored log files
-
-        return "Traffic log between " + startTime + " and " + endTime;
+        StringBuilder logBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader("messages.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String dateTimeStr = line.substring(line.indexOf('[') + 1, line.indexOf(']'));
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Date logDateTime = formatter.parse(dateTimeStr);
+                if (logDateTime.compareTo(startTime) >= 0 && logDateTime.compareTo(endTime) <= 0) {
+                    logBuilder.append(line).append("\n");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return logBuilder.toString();
     }
 
     public static void main(String[] args) {

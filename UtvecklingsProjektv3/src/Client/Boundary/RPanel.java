@@ -25,6 +25,7 @@ public class RPanel extends JPanel {
     private JLabel chatPic;
     private JLabel username;
     private JLabel chatbuddyname;
+    private ImageIcon imageToSend;
 
     public RPanel(Client controller, LPanel leftpanel, int width, int height) {
         this.controller = controller;
@@ -56,6 +57,7 @@ public class RPanel extends JPanel {
 
             if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 imagePath = fileChooser.getSelectedFile().getAbsolutePath();
+                imageToSend = new ImageIcon(imagePath);
             }
         });
 
@@ -141,14 +143,22 @@ public class RPanel extends JPanel {
 
     public void newMessage(Message msg) {
         String text = String.format("%s %s skriver: %s \n", msg.getHourTime(), msg.getSender(), msg.getText());
+        if(msg.getIcon() != null){
+            System.out.println("hej");
+            JOptionPane.showMessageDialog(null, msg.getIcon());
+        }
         chatWindow.append(text);
+
     }
 
     class ButtonActionListeners implements ActionListener {
         public void actionPerformed(ActionEvent e)
         {
             if (e.getSource() == sendMessage) {
-                controller.sendMessage(writeMessageWindow.getText(), leftpanel.getSelectedRecipients());
+                Message message = new Message();
+                message.setIcon(imageToSend);
+                message.setText(writeMessageWindow.getText());
+                controller.sendMessage(message, leftpanel.getSelectedRecipients());
                 writeMessageWindow.setText("");
 
             }

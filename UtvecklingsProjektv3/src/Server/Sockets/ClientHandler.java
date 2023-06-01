@@ -3,10 +3,7 @@ import Entity.Buffer;
 import Entity.Message;
 import Entity.User;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler {
@@ -60,6 +57,7 @@ public class ClientHandler {
                             System.out.println("En klient disconnetar!");
                         } else {
                             server.sendMessage(msg);
+                            saveMessageToFile(msg);
                         }
                     }
 
@@ -69,6 +67,15 @@ public class ClientHandler {
                         server.updateActiveClientUser(user, clientHandler);
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void saveMessageToFile(Message message) {
+            try (FileWriter writer = new FileWriter("messages.txt", true)) {
+                String formattedMessage = String.format("[%s] %s: %s\n", message.getDateTime(), message.getSender(), message.getText());
+                writer.write(formattedMessage);
             } catch (Exception e) {
                 e.printStackTrace();
             }

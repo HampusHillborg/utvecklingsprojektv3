@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Message implements Serializable {
     private String text;
-    private Icon icon;
+    private ImageIcon icon;
     private User sender;
     private String hourTime;
     private String dateTime;
@@ -34,11 +34,11 @@ public class Message implements Serializable {
         this.text = text;
     }
 
-    public Icon getIcon() {
+    public ImageIcon getIcon() {
         return icon;
     }
 
-    public void setIcon(Icon icon) {
+    public void setIcon(ImageIcon icon) {
         this.icon = icon;
     }
 

@@ -38,13 +38,11 @@ public class Client {
         serverConnection.clientDisconnecting();
     }
 
-    public void sendMessage(String text, ArrayList<String> recipients) {
-        Message msg = new Message();
-        msg.setText(text);
-        msg.setSender(serverConnection.getUser());
-        msg.setRecipients(serverConnection.getUser().getUsersFromString(recipients));
-        serverConnection.sendMessage(msg);
-        view.displayNewMessage(msg);
+    public void sendMessage(Message message, ArrayList<String> recipients) {
+        message.setSender(serverConnection.getUser());
+        message.setRecipients(serverConnection.getUser().getUsersFromString(recipients));
+        serverConnection.sendMessage(message);
+        view.displayNewMessage(message);
     }
 
     public ServerConnection getServerConnection() {
