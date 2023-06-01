@@ -1,9 +1,10 @@
 package Client.Boundary;
 
+
+
 import Client.Controller.Client;
 import Entity.ServerUpdate;
 import Entity.User;
-
 
 import javax.swing.*;
 import java.awt.*;
