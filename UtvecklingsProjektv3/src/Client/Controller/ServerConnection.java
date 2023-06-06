@@ -7,6 +7,8 @@ import Entity.*;
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ServerConnection {
 
@@ -118,8 +120,10 @@ public class ServerConnection {
                         System.out.println("Client received a contact list update!");
                         ContactList update = (ContactList) obj;
                         System.out.println(update.getContacts());
-                        user.setContacts(update.getContacts());
-                        view.setContacts(update.getContacts());
+                        // Make sure the list of contacts is unique
+                        ArrayList<String> uniqueContacts = new ArrayList<>(new HashSet<>(update.getContacts()));
+                        user.setContacts(uniqueContacts);
+                        view.setContacts(uniqueContacts);
                     }
 
 
