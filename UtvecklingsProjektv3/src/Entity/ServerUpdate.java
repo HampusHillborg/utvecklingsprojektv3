@@ -9,7 +9,6 @@ public class ServerUpdate implements Serializable {
     private ArrayList<User> connectedList;
 
     public ServerUpdate(){
-
     }
 
     public User getNewUserConnected() {

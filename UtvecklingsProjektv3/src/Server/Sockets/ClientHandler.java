@@ -5,6 +5,7 @@
 package Server.Sockets;
 
 import Entity.Buffer;
+import Entity.ContactList;
 import Entity.Message;
 import Entity.User;
 
@@ -29,6 +30,23 @@ public class ClientHandler {
         objectBuffer = new Buffer<Object>();
         new MessageReceiver(this).start();
         new MessageSender().start();
+    }
+
+    private ContactList loadContacts() {
+        ContactList contactList = null;
+        try {
+            File file = new File("contact_list.txt");
+            if (file.exists()) {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+                contactList = (ContactList) ois.readObject();
+                ois.close();
+                return contactList;
+
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return contactList;
     }
 
     /**
@@ -110,6 +128,7 @@ public class ClientHandler {
                     if (obj instanceof User) {
                         // If the received object is a User, update the active client user in the server
                         User user = (User) obj;
+                        user.setContacts(loadContacts().getContacts());
                         System.out.println(user.getContacts());
                         server.updateActiveClientUser(user, clientHandler);
                     }

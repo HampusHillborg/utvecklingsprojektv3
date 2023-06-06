@@ -22,9 +22,23 @@ public class ServerConnection {
         this.user = user;
         messageBuffer = new Buffer<Object>();
         socket = new Socket(ip, port);
+
         new ClientOutput().start();
         new ClientInput().start();
     }
+
+
+    private void saveContacts() {
+        try {
+            File file = new File("contact_list.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(new ContactList(user, user.getContacts()));
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void sendMessage(Message message){
         messageBuffer.put(message);
@@ -44,6 +58,7 @@ public class ServerConnection {
     }
     public void addContacts(String contact){
         this.user.addContact(contact);
+        saveContacts();
     }
 
 
@@ -98,14 +113,15 @@ public class ServerConnection {
                         view.serverUpdate(update);
 
                     }
-                    if(obj instanceof ContactList){
-                        //Clienten fick veta vilka kontakter den har
-                        System.out.println("Clienten fick en kontaktuppdatering!");
+                    if (obj instanceof ContactList) {
+                        // Client received the contact list
+                        System.out.println("Client received a contact list update!");
                         ContactList update = (ContactList) obj;
                         System.out.println(update.getContacts());
                         user.setContacts(update.getContacts());
                         view.setContacts(update.getContacts());
                     }
+
 
                     if(obj instanceof Message){
                         //Nytt meddelande. Displaya det i view.
@@ -119,6 +135,8 @@ public class ServerConnection {
                 e.printStackTrace();
             }
         }
+
+
     }
 
 }
